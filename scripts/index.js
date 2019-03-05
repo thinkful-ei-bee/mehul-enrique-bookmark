@@ -18,8 +18,3 @@ $(document).ready(function(){
 
 
 });
-api.createItem({
-  title:'youtube',
-  url:'https://youtube.com'
-})
-.then(resp => console.log(resp));

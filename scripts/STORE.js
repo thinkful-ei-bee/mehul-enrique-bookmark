@@ -6,19 +6,25 @@ const STORE = (function(){
         { title:"", rating:"", description: "", urlLink: "",}
     ];
 */
-    const currentView = 'condensed';//condensed (default) / detailed / is adding / filtered/ error
+  const currentView = 'condensed';//condensed (default) / detailed / is adding / filtered/ error
 
-    const addBookmark = function(item) {
+  const addBookmark = function(item) {
     
-        this.store_bookmarks.push(item);
-      };
+    this.store_bookmarks.push(item);
+  };
     
+  const deleteBookmark = function(id)
+  {
+    this.store_bookmarks = this.store_bookmarks.filter(bookmark => bookmark.id !== id);
+
+  };
 
 
-    return {
-        store_bookmarks:[],
-        currentView,
-        addBookmark,
-    };
+  return {
+    store_bookmarks:[],
+    currentView,
+    addBookmark,
+    deleteBookmark,
+  };
 
 }() );
