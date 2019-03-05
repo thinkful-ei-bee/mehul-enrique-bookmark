@@ -1,30 +1,29 @@
 'use strict';
 
-const bookMarks = (function(){
+const bookmark_handlers = (function(){
 
-    //event handler functions
-    // render functions
+  //event handler functions
+  // render functions
 
-function handleDeleteItem(){
+  function handleDeleteItem(){
 
-}
+  }
 
-function handleAddItem(){
+  function handleAddItem(){
 
-}
+  }
 
-function handleDetailedView(){
+  function handleDetailedView(){
 
-}
+  }
 
-function handleFilter(){
+  function handleFilter(){
 
-}
+  }
 
-function generateBookMarkHtml(bookmark){
-    
-    return 
-   ` <li class="js-item-element" id=${bookmark.id}>
+  function generateBookMarkHtml(bookmark){
+    console.log(bookmark);
+    return ` <li class="js-item-element" id=${bookmark.id}>
     <p> ${bookmark.title} </p>
     <p> ${bookmark.url}</p>
       <button class="book-mark-detail-toggle ">
@@ -34,25 +33,30 @@ function generateBookMarkHtml(bookmark){
         <span class="button-label">delete</span>
       </button>
   </li>`;
-}
-function generateBookMarkString(bookmarks){
+  }
+  function generateBookMarkString(bookmarks){
     const updatedBookmarks = bookmarks.map(i => generateBookMarkHtml(i));
     return updatedBookmarks.join('');
-}
+  }
 
-function render(){
-    let bookmarks = [...STORE.bookMarks]
+  function render(){
+    let store_bookmarks = STORE.store_bookmarks;
+    const bookmarkItems = generateBookMarkString(store_bookmarks);
+    $('.book-mark-list').html(bookmarkItems);
+  }
 
-    const bookMarkItems = generateBookMarkString(bookmarks);
-    $('.book-mark-list').html(bookMarkItems);
-}
+  function listenDelete(){
+   $()
 
-function bindEventListeners(){
-    generateBookMarkHtml
-}
-return{
+
+  }
+
+  function bindEventListeners(){
+   // generateBookMarkHtml();
+  }
+  return{
     render,
     bindEventListeners,
-}
+  };
 
 }() );

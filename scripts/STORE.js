@@ -1,17 +1,24 @@
+'use strict';
 const STORE = (function(){
 
-    const bookMarks = [
+  /*  const bookMarks = [
         { title:"", rating:"", description: "", urlLink: "",},
         { title:"", rating:"", description: "", urlLink: "",}
     ];
+*/
+    const currentView = 'condensed';//condensed (default) / detailed / is adding / filtered/ error
 
-    const currentView = //condensed (default) / detailed / is adding / filtered/ error
-
+    const addBookmark = function(item) {
+    
+        this.store_bookmarks.push(item);
+      };
+    
 
 
     return {
-        bookMarks,
+        store_bookmarks:[],
         currentView,
-    }
+        addBookmark,
+    };
 
 }() );
