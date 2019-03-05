@@ -16,7 +16,7 @@ const bookmark_handlers = (function(){
       const newItemUrl= $('.js-book-mark-url').val();
       const newItemTitle = $(".js-book-mark-title").val();
       let newItemDesc = $(".js-book-mark-description").val();
-      let newItemRating = $(".js-book-mark-rating").val();
+      let newItemRating = $(".book-mark-rating option:selected" ).text();
 
       if(newItemDesc === ""){
         newItemDesc = null;
