@@ -10,6 +10,35 @@ const bookmark_handlers = (function(){
   }
 
   function handleAddItem(){
+    $('#add-book-mark-form').on('submit', event => {
+      console.log('got here');
+      event.preventDefault();
+      const newItemUrl= $('.js-book-mark-url').val();
+      const newItemTitle = $(".js-book-mark-title").val();
+      let newItemDesc = $(".js-book-mark-description").val();
+      let newItemRating = $(".js-book-mark-rating").val();
+
+      if(newItemDesc === ""){
+        newItemDesc = null;
+      }
+      if (newItemRating === ""){
+        newItemRating = null;
+      }
+
+      api.createItem({
+        title: newItemTitle,
+        url: newItemUrl,
+        desc: newItemDesc,
+        rating: newItemRating,
+      })
+        .then((data) => STORE.store_bookmarks.push(data))
+        .then(render());
+    })
+
+    // STORE.currentView= addingItem;
+    // render()
+  }
+  function handleItemSubmit(){
 
   }
 
@@ -68,9 +97,10 @@ const bookmark_handlers = (function(){
   function bindEventListeners(){
     // generateBookMarkHtml();
     listenDelete();
+    handleAddItem();
   }
   return{
-    render,
+    render:render,
     bindEventListeners:bindEventListeners,
   };
 

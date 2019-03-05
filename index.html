@@ -10,7 +10,17 @@
 
 <body>
   <div class="container">
-    <section class ="book-mark-list"> </section>
+
+    <form id="add-book-mark-form">
+      <input type="text" name="book-mark-title" class="js-book-mark-title" required >
+      <input type="text" name="book-mark-url" class="js-book-mark-url" required>
+      <input type="text" name="book-mark-description" class="js-book-mark-description">
+      <select class="book-mark-rating"> <option value=""></option><option value="1">1</option> <option value="2">2</option> <option value="3">3</option> <option value="4">4</option> </select>
+      <button type="submit"> Add Bookmark </button>
+    </form>
+
+    <section class ="book-mark-list">
+    </section>
   </div>
 
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cuid/1.3.8/browser-cuid.min.js"></script>
