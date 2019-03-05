@@ -31,8 +31,10 @@ const bookmark_handlers = (function(){
         desc: newItemDesc,
         rating: newItemRating,
       })
-        .then((data) => STORE.store_bookmarks.push(data))
-        .then(render());
+        .then((data) => {
+                        STORE.store_bookmarks.push(data);
+                        render();
+                      });
     })
 
     // STORE.currentView= addingItem;
