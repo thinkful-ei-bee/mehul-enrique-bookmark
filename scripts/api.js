@@ -4,29 +4,29 @@
 
 const api = (function () {
   
-  const baseUrl = 'https://thinkful-list-api.herokuapp.com/enrique-joel';
+  const baseUrl = 'https://thinkful-list-api.herokuapp.com/mehul/bookmarks';
 
   function getItems() {
-    return listApiFetch(`${baseUrl}/items`);
+    return listApiFetch(`${baseUrl}`);
   }
 
   function deleteItem(id) {
-    return listApiFetch(`${baseUrl}/items/${id}`,{
+    return listApiFetch(`${baseUrl}/${id}`,{
       method: 'DELETE',    
     });
   }
 
-  function createItem(name) {
-    return listApiFetch(`${baseUrl}/items`, {
+  function createItem(createData) {
+    return listApiFetch(`${baseUrl}`, {
       method: 'POST', 
       headers: {
         'Content-Type': 'application/json',
       }, 
-      body: JSON.stringify({ name }) });
+      body: JSON.stringify(createData) });
   }
 
   function updateItem(id, updateData) {
-    return listApiFetch(`${baseUrl}/items/${id}`,{
+    return listApiFetch(`${baseUrl}/${id}`,{
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -37,13 +37,13 @@ const api = (function () {
 
   function listApiFetch(...args) {
     let error;
+    console.log(args[0]);
     return fetch(...args)
       .then(res => {
         if (!res.ok) {
           //took away the extra return statements and reassigned error to use it 
           //as a boolean in the next chain
           error = {code: res.status};
-          store.errorKeys.push(error);
         
         }
         return res.json();
