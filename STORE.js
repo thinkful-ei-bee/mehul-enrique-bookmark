@@ -5,7 +5,7 @@ const STORE = (function(){
         { title:"", rating:"", description: "", urlLink: "",}
     ];
 
-    const currentView = //condensed (default) / detailed/ is adding/ filtered/ error
+    const currentView = //condensed (default) / detailed / is adding / filtered/ error
 
 
 
