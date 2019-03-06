@@ -42,7 +42,7 @@ const STORE = (function(){
   return {
     store_bookmarks:[],
     currentView,
-    showFilteredItems = false,
+    showFilteredItems: false,
     addBookmark,
     deleteBookmark,
     expandBookmark,
