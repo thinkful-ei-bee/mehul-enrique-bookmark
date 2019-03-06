@@ -6,8 +6,9 @@ const STORE = (function(){
         { title:"", rating:"", description: "", urlLink: "",}
     ];
 */
-  const currentView = 'condensed';//condensed (default) / detailed / is adding / filtered/ error
 
+
+  const error_msg = "";
   const addBookmark = function(item) {
     
     this.store_bookmarks.push(item);
@@ -25,15 +26,16 @@ const STORE = (function(){
        obj.id === id
     );
 
-    console.log(expand_obj);
+  
     expand_obj[0].expanded = !expand_obj[0].expanded;
   };
 
   const toggleFilter= function(num){
-    console.log('got here');
+    
+    this.store_bookmarks.forEach(i=> i.filtered=false);
     let filteredBookMarks = this.store_bookmarks.filter(i => i.rating < num );
     filteredBookMarks.forEach(i=> i.filtered=true);
-    console.log(filteredBookMarks);
+   
     // trying to filter out the bookmarks with lower rating by adding class of hidden
     // $(filteredBookMarks).addClass("hidden"); 
   
@@ -44,12 +46,12 @@ const STORE = (function(){
 
   return {
     store_bookmarks:[],
-    currentView,
     showFilteredItems: false,
     addBookmark,
     deleteBookmark,
     expandBookmark,
     toggleFilter,
+    error_msg
   };
 
 }() );

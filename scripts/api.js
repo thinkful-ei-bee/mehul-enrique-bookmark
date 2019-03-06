@@ -41,6 +41,8 @@ const api = (function () {
     return fetch(...args)
       .then(res => {
         if (!res.ok) {
+         
+
           //took away the extra return statements and reassigned error to use it 
           //as a boolean in the next chain
           error = {code: res.status};

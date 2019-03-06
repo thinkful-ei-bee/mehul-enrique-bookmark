@@ -3,11 +3,11 @@
 const bookmark_handlers = (function(){
 
   
-//**************************RENDER AND TEMPLATE GENERATING FUNCTIONS ******************************* */
+  //**************************RENDER AND TEMPLATE GENERATING FUNCTIONS ******************************* */
   function generateBookMarkHtml(bookmark){
     if(bookmark.expanded === false)
     {
-    return ` <li class="js-item-element" data-item-id=${bookmark.id}>
+      return ` <li class="js-item-element" data-item-id=${bookmark.id}>
     <p> Title: ${bookmark.title} </p>
     <p> Rating: ${bookmark.rating}</p>
       <button class="book-mark-detail-toggle">
@@ -17,8 +17,8 @@ const bookmark_handlers = (function(){
         <span class="button-label">delete</span>
       </button>
   </li>`;}
-  else{
-    return ` <li class="js-item-element" data-item-id=${bookmark.id}>
+    else{
+      return ` <li class="js-item-element" data-item-id=${bookmark.id}>
     <p> Title: ${bookmark.title} </p>
     <p> Description: ${bookmark.desc === null ? 'No description': bookmark.desc}</p>
     <p> Rating: ${bookmark.rating === null ? 'Not rated': bookmark.rating }</p>
@@ -40,22 +40,33 @@ const bookmark_handlers = (function(){
 
   function render(){
     let store_bookmarks = STORE.store_bookmarks;
+    $('.error-message').html('');
 
     if(STORE.showFilteredItems){
-      store_bookmarks = store_bookmarks.filter(i => !i.filtered)
+      store_bookmarks = store_bookmarks.filter(i => !i.filtered);
     }
     const bookmarkItems = generateBookMarkString(store_bookmarks);
     $('.book-mark-list').html(bookmarkItems);
   }
 
-
-
-
-
-//**************************UTILITY FUNCTIONS********************************* */
+    
   
 
-function getItemIdFromElement(item) {
+  function generateErrorHTML(error_msg)
+  { 
+    return ` 
+    <p> ${error_msg} </p>`;
+
+
+  }
+
+
+
+
+  //**************************UTILITY FUNCTIONS********************************* */
+  
+
+  function getItemIdFromElement(item) {
     return $(item)
       .closest('.js-item-element')
       .data('item-id');
@@ -69,25 +80,24 @@ function getItemIdFromElement(item) {
       event.preventDefault();
       const id = getItemIdFromElement(event.currentTarget);
       api.deleteItem(id)
-        .then(STORE.deleteBookmark(id));
-      render();
+        .then(STORE.deleteBookmark(id))
+        .then(render());
 
     });
   }
 
   function handleAddItem(){
     $('#add-book-mark-form').on('submit', event => {
-      console.log('got here');
       event.preventDefault();
       const newItemUrl= $('.js-book-mark-url').val();
-      const newItemTitle = $(".js-book-mark-title").val();
-      let newItemDesc = $(".js-book-mark-description").val();
-      let newItemRating = $(".book-mark-rating option:selected" ).text();
+      const newItemTitle = $('.js-book-mark-title').val();
+      let newItemDesc = $('.js-book-mark-description').val();
+      let newItemRating = $('.book-mark-rating option:selected' ).text();
 
-      if(newItemDesc === ""){
+      if(newItemDesc === ''){
         newItemDesc = null;
       }
-      if (newItemRating === ""){
+      if (newItemRating === ''){
         newItemRating = null;
       }
 
@@ -102,14 +112,27 @@ function getItemIdFromElement(item) {
           //// added .filtered for filter function
           data.filtered = false;
 
-          console.log(data.expanded);
-                        STORE.store_bookmarks.push(data);
-                        render();
-                      });
-    })
+         
+          STORE.store_bookmarks.push(data);
+          render();
+        })
+        .catch(err => { 
+          STORE.error_msg = err.message;
+          renderError();
+         });
+    });
 
   }
 
+  function renderError()
+  {
+
+    const error_html = generateErrorHTML(STORE.error_msg);
+    $('.error-message').html(error_html);
+
+
+    
+  }
   function handleExpanded() {
     $('.book-mark-list').on('click','.book-mark-detail-toggle', event => {
       event.preventDefault();
@@ -125,18 +148,30 @@ function getItemIdFromElement(item) {
     $('.filter-drop-down').on('click','#filter-toggle', event => {
       event.preventDefault();
       STORE.showFilteredItems = true;
-      const filterNumber = $(".book-mark-rating-filter option:selected" ).val();
+      const filterNumber = $('.book-mark-rating-filter option:selected' ).val();
       STORE.toggleFilter(filterNumber);
       render();
-    })
+    });
   }
 
+  function handleClearFilter(){
+    $('.filter-drop-down').on('click','#filter-clear-toggle', event => {
+      event.preventDefault();
+      STORE.showFilteredItems = false;
+      
+      render();
+    });
+  }
+
+
+ 
   function bindEventListeners(){
  
     listenDelete();
     handleAddItem();
     handleExpanded();
     handleFilter();
+    handleClearFilter();
   }
   return{
     render:render,

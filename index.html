@@ -13,21 +13,30 @@
   <div class="container">
 
     <form id="add-book-mark-form">
-      <input type="text" name="book-mark-title" class="js-book-mark-title" required >
-      <input type="text" name="book-mark-url" class="js-book-mark-url" required>
+      <input type="text" name="book-mark-title" class="js-book-mark-title"  >
+      <input type="text" name="book-mark-url" class="js-book-mark-url" >
       <input type="text" name="book-mark-description" class="js-book-mark-description">
-      <select class="book-mark-rating"> <option value=""></option><option value="1">1</option> <option value="2">2</option> <option value="3">3</option> <option value="4">4</option> </select>
+      <select class="book-mark-rating"> <option value=""></option><option value="1">1</option> <option value="2">2</option> <option value="3">3</option> <option value="4">4</option> <option value="5">5</option> </select>
       <button type="submit"> Add Bookmark </button>
     </form>
 
     <div class= "filter-drop-down">
-      <select class="book-mark-rating-filter"> <option value=""></option><option value="1">1</option> <option value="2">2</option> <option value="3">3</option> <option value="4">4</option> </select>
+      <select class="book-mark-rating-filter"> <option value=""></option><option value="1">1</option> <option value="2">2</option> <option value="3">3</option> <option value="4">4</option> <option value="5">5</option> </select>
       <button id= "filter-toggle"> 
         <span class="button-label">Filter your Bookmarks</span>
       </button>
 
-    </div>
+      <button id= "filter-clear-toggle"> 
+          <span class="button-label">Clear Filter</span>
+        </button>
+  
 
+    </div>
+    <div class ="error-message">
+
+
+
+    </div>
     <section class ="book-mark-list">
     </section>
   </div>

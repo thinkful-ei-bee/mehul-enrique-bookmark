@@ -13,6 +13,7 @@ $(document).ready(function(){
       items.forEach((item) => 
       {
         item.expanded = false;
+        item.filtered = false;
        // console.log(item.expanded);
         STORE.addBookmark(item);
       });
