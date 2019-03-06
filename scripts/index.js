@@ -9,9 +9,14 @@ $(document).ready(function(){
   bookmark_handlers.render();
 
   api.getItems() 
-  .then(items => {
-     items.forEach((item) => STORE.addBookmark(item));
-     bookmark_handlers.render();
+    .then(items => {
+      items.forEach((item) => 
+      {
+        item.expanded = false;
+       // console.log(item.expanded);
+        STORE.addBookmark(item);
+      });
+      bookmark_handlers.render();
     });
 
   

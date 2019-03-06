@@ -16,7 +16,7 @@ const bookmark_handlers = (function(){
       const newItemUrl= $('.js-book-mark-url').val();
       const newItemTitle = $(".js-book-mark-title").val();
       let newItemDesc = $(".js-book-mark-description").val();
-      let newItemRating = $(".js-book-mark-rating").val();
+      let newItemRating = $(".book-mark-rating option:selected" ).text();
 
       if(newItemDesc === ""){
         newItemDesc = null;
@@ -32,6 +32,8 @@ const bookmark_handlers = (function(){
         rating: newItemRating,
       })
         .then((data) => {
+          data.expanded = false;
+          console.log(data.expanded);
                         STORE.store_bookmarks.push(data);
                         render();
                       });
@@ -53,18 +55,37 @@ const bookmark_handlers = (function(){
   }
 
   function generateBookMarkHtml(bookmark){
-    console.log(bookmark);
+    if(bookmark.expanded === false)
+    {
     return ` <li class="js-item-element" data-item-id=${bookmark.id}>
-    <p> ${bookmark.title} </p>
-    <p> ${bookmark.url}</p>
-      <button class="book-mark-detail-toggle ">
+    <p> Title: ${bookmark.title} </p>
+    <p> URL: ${bookmark.url}</p>
+      <button class="book-mark-detail-toggle">
         <span class="button-label">See more details</span>
       </button>
       <button class="book-mark-delete">
         <span class="button-label">delete</span>
       </button>
-  </li>`;
+  </li>`;}
+  else{
+    return ` <li class="js-item-element" data-item-id=${bookmark.id}>
+    <p> Title: ${bookmark.title} </p>
+    <p> URL: ${bookmark.url}</p>
+    <p> Description: ${bookmark.desc === null ? 'No description': bookmark.desc}</p>
+    <p> Rating: ${bookmark.rating === null ? 'Not rated': bookmark.rating }</p>
+      <button class="book-mark-detail-toggle">
+        <span class="button-label">See more details</span>
+      </button>
+      <button class="book-mark-delete">
+        <span class="button-label">delete</span>
+      </button>
+  </li>`;}
+
   }
+
+
+  
+
   function generateBookMarkString(bookmarks){
     const updatedBookmarks = bookmarks.map(i => generateBookMarkHtml(i));
     return updatedBookmarks.join('');
@@ -84,7 +105,6 @@ const bookmark_handlers = (function(){
 
   function listenDelete(){
     $('.book-mark-list').on('click','.book-mark-delete', event => {
-      console.log("here");
       event.preventDefault();
       const id = getItemIdFromElement(event.currentTarget);
       api.deleteItem(id)
@@ -92,7 +112,16 @@ const bookmark_handlers = (function(){
       render();
 
     });
+  }
 
+  function handleExpanded() {
+    $('.book-mark-list').on('click','.book-mark-detail-toggle', event => {
+      event.preventDefault();
+      const id = getItemIdFromElement(event.currentTarget);
+      STORE.expandBookmark(id);
+      render();
+
+    });
 
   }
 
@@ -100,6 +129,7 @@ const bookmark_handlers = (function(){
     // generateBookMarkHtml();
     listenDelete();
     handleAddItem();
+    handleExpanded();
   }
   return{
     render:render,
