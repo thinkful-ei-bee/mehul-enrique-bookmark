@@ -45,7 +45,8 @@ const STORE = (function(){
     deleteBookmark,
     expandBookmark,
     toggleFilter,
-    error_msg
+    error_msg,
+    filter_num
   };
 
 }() );
