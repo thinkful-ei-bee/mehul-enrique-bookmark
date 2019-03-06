@@ -31,9 +31,12 @@ const STORE = (function(){
 
   const toggleFilter= function(num){
     console.log('got here');
-    let filteredBookMarks = this.store_bookmarks.filter(i => i.rating >= num );
-    filteredBookMarks.forEach(i => i.showFilteredItems === !i.showFilteredItems); 
-    // showOnlyFilteredItems(filteredBookMarks);
+    let filteredBookMarks = this.store_bookmarks.filter(i => i.rating < num );
+    filteredBookMarks.forEach(i=> i.filtered=true);
+    console.log(filteredBookMarks);
+    // trying to filter out the bookmarks with lower rating by adding class of hidden
+    // $(filteredBookMarks).addClass("hidden"); 
+  
   }
 
 

@@ -40,6 +40,10 @@ const bookmark_handlers = (function(){
 
   function render(){
     let store_bookmarks = STORE.store_bookmarks;
+
+    if(STORE.showFilteredItems){
+      store_bookmarks = store_bookmarks.filter(i => !i.filtered)
+    }
     const bookmarkItems = generateBookMarkString(store_bookmarks);
     $('.book-mark-list').html(bookmarkItems);
   }
@@ -95,6 +99,9 @@ function getItemIdFromElement(item) {
       })
         .then((data) => {
           data.expanded = false;
+          //// added .filtered for filter function
+          data.filtered = false;
+
           console.log(data.expanded);
                         STORE.store_bookmarks.push(data);
                         render();
@@ -117,9 +124,10 @@ function getItemIdFromElement(item) {
   function handleFilter(){
     $('.filter-drop-down').on('click','#filter-toggle', event => {
       event.preventDefault();
-      
+      STORE.showFilteredItems = true;
       const filterNumber = $(".book-mark-rating-filter option:selected" ).val();
       STORE.toggleFilter(filterNumber);
+      render();
     })
   }
 
