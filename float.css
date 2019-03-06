@@ -57,7 +57,15 @@
         width: 50%;
     }
     body{
-        background-color: white;
+       
     }
+    .col-3 { width: 25%; }
+
+
+    .col-4 { width: 33.33%; }
+
+.col-6 { width: 50%; }
+
+.col-12 { width: 100%; }
 
   }
