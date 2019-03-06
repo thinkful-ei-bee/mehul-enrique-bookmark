@@ -5,13 +5,18 @@
   
   body {
     font-family: 'Roboto', sans-serif;
+    background-color: white;
   }
   
   .container {
     max-width: 1000px;
     margin: 0 auto;
     padding-top: 40px;
+    
   }
 
+  li{
+    border:5px;
+  }
   
  
