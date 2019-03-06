@@ -41,10 +41,6 @@ const api = (function () {
     return fetch(...args)
       .then(res => {
         if (!res.ok) {
-         
-
-          //took away the extra return statements and reassigned error to use it 
-          //as a boolean in the next chain
           error = {code: res.status};
         
         }
@@ -54,13 +50,10 @@ const api = (function () {
       .then(data => {
       
         
-        if (error) { // if error is true, then this happens
+        if (error) { 
           error.message=data.message;
           return Promise.reject(error);
         }
-        
-        // Otherwise give back the data as resolved Promise
-        
         return data;
       });
   }

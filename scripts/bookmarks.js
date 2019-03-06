@@ -60,7 +60,15 @@ const bookmark_handlers = (function(){
 
   }
 
+  function renderError()
+  {
 
+    const error_html = generateErrorHTML(STORE.error_msg);
+    $('.error-message').html(error_html);
+
+
+    
+  }
 
 
   //**************************UTILITY FUNCTIONS********************************* */
@@ -128,15 +136,7 @@ const bookmark_handlers = (function(){
 
   }
 
-  function renderError()
-  {
 
-    const error_html = generateErrorHTML(STORE.error_msg);
-    $('.error-message').html(error_html);
-
-
-    
-  }
   function handleExpanded() {
     $('.book-mark-list').on('click','.book-mark-detail-toggle', event => {
       event.preventDefault();

@@ -1,11 +1,7 @@
 'use strict';
 const STORE = (function(){
 
-  /*  const bookMarks = [
-        { title:"", rating:"", description: "", urlLink: "",},
-        { title:"", rating:"", description: "", urlLink: "",}
-    ];
-*/
+
 
 
   const error_msg = "";
@@ -36,8 +32,6 @@ const STORE = (function(){
     let filteredBookMarks = this.store_bookmarks.filter(i => i.rating < num );
     filteredBookMarks.forEach(i=> i.filtered=true);
    
-    // trying to filter out the bookmarks with lower rating by adding class of hidden
-    // $(filteredBookMarks).addClass("hidden"); 
   
   }
 
