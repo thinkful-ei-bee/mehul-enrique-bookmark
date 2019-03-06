@@ -115,7 +115,12 @@ function getItemIdFromElement(item) {
   }
 
   function handleFilter(){
-
+    $('.filter-drop-down').on('click','#filter-toggle', event => {
+      event.preventDefault();
+      console.log('you did it');
+      const filterNumber = $(".book-mark-rating-filter option:selected" ).val();
+      STORE.toggleFilter(filterNumber);
+    })
   }
 
   function bindEventListeners(){
@@ -123,6 +128,7 @@ function getItemIdFromElement(item) {
     listenDelete();
     handleAddItem();
     handleExpanded();
+    handleFilter();
   }
   return{
     render:render,
