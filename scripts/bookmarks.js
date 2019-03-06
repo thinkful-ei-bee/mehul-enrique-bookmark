@@ -81,7 +81,11 @@ const bookmark_handlers = (function(){
       const id = getItemIdFromElement(event.currentTarget);
       api.deleteItem(id)
         .then(STORE.deleteBookmark(id))
-        .then(render());
+        .then(render())
+        .catch(err => { 
+          STORE.error_msg = err.message;
+          renderError();
+        });
 
     });
   }
@@ -119,7 +123,7 @@ const bookmark_handlers = (function(){
         .catch(err => { 
           STORE.error_msg = err.message;
           renderError();
-         });
+        });
     });
 
   }
