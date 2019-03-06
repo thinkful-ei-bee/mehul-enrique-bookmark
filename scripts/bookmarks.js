@@ -9,7 +9,7 @@ const bookmark_handlers = (function(){
     {
     return ` <li class="js-item-element" data-item-id=${bookmark.id}>
     <p> Title: ${bookmark.title} </p>
-    <p> URL: ${bookmark.url}</p>
+    <p> Rating: ${bookmark.rating}</p>
       <button class="book-mark-detail-toggle">
         <span class="button-label">See more details</span>
       </button>
@@ -20,11 +20,11 @@ const bookmark_handlers = (function(){
   else{
     return ` <li class="js-item-element" data-item-id=${bookmark.id}>
     <p> Title: ${bookmark.title} </p>
-    <p> URL: ${bookmark.url}</p>
     <p> Description: ${bookmark.desc === null ? 'No description': bookmark.desc}</p>
     <p> Rating: ${bookmark.rating === null ? 'Not rated': bookmark.rating }</p>
-      <button class="book-mark-detail-toggle">
-        <span class="button-label">See more details</span>
+    <input type="button" value="Visit Site" onclick="window.open('${bookmark.url}','_blank')" />  
+    <button class="book-mark-detail-toggle">
+        <span class="button-label">See less details</span>
       </button>
       <button class="book-mark-delete">
         <span class="button-label">delete</span>
