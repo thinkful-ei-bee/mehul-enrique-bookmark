@@ -46,9 +46,15 @@ const bookmark_handlers = (function(){
 
       if(STORE.showFilteredItems){
         store_bookmarks = store_bookmarks.filter(i => !i.filtered);
+        
       }
       const bookmarkItems = generateBookMarkString(store_bookmarks);
       $('.book-mark-list').html(bookmarkItems);
+      $('.js-book-mark-url').val('');
+      $('.js-book-mark-title').val('');
+      $('.js-book-mark-description').val('');
+      $('.book-mark-rating option:selected').prop('selected', function() { return this.defaultSelected; });
+     
     }
     else
     {
@@ -185,6 +191,9 @@ const bookmark_handlers = (function(){
       STORE.showFilteredItems = false;
       
       render();
+    
+      $('.book-mark-rating-filter option:selected').prop('selected', function() { return this.defaultSelected; });
+
     });
   }
 
