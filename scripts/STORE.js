@@ -29,15 +29,24 @@ const STORE = (function(){
     expand_obj[0].expanded = !expand_obj[0].expanded;
   };
 
-  
+  const toggleFilter= function(num){
+    console.log('got here');
+    let filteredBookMarks = this.store_bookmarks.filter(i => i.rating >= num );
+    filteredBookMarks.forEach(i => i.showFilteredItems === !i.showFilteredItems); 
+    // showOnlyFilteredItems(filteredBookMarks);
+  }
+
+
 
 
   return {
     store_bookmarks:[],
     currentView,
+    showFilteredItems = false,
     addBookmark,
     deleteBookmark,
-    expandBookmark
+    expandBookmark,
+    toggleFilter,
   };
 
 }() );
