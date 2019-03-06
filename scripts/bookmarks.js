@@ -9,7 +9,7 @@ const bookmark_handlers = (function(){
     {
       return ` <li class="js-item-element" data-item-id=${bookmark.id}>
     <p> Title: ${bookmark.title} </p>
-    <p> Rating: ${bookmark.rating}</p>
+    <p> Rating: ${bookmark.rating === null ? 'Not rated': bookmark.rating}</p>
       <button class="book-mark-detail-toggle">
         <span class="button-label">See more details</span>
       </button>
@@ -39,14 +39,21 @@ const bookmark_handlers = (function(){
   }
 
   function render(){
-    let store_bookmarks = STORE.store_bookmarks;
-    $('.error-message').html('');
+    if(STORE.error_msg === '')
+    {
+      let store_bookmarks = STORE.store_bookmarks;
+      $('.error-message').html('');
 
-    if(STORE.showFilteredItems){
-      store_bookmarks = store_bookmarks.filter(i => !i.filtered);
+      if(STORE.showFilteredItems){
+        store_bookmarks = store_bookmarks.filter(i => !i.filtered);
+      }
+      const bookmarkItems = generateBookMarkString(store_bookmarks);
+      $('.book-mark-list').html(bookmarkItems);
     }
-    const bookmarkItems = generateBookMarkString(store_bookmarks);
-    $('.book-mark-list').html(bookmarkItems);
+    else
+    {
+      renderError();
+    }
   }
 
     
@@ -92,7 +99,11 @@ const bookmark_handlers = (function(){
         .then(render())
         .catch(err => { 
           STORE.error_msg = err.message;
-          renderError();
+          render();
+          setTimeout(function(){
+            STORE.error_msg = '';
+            render();
+          },5000);
         });
 
     });
@@ -122,15 +133,24 @@ const bookmark_handlers = (function(){
         .then((data) => {
           data.expanded = false;
           //// added .filtered for filter function
-          data.filtered = false;
-
+          if(STORE.showFilteredItems === true && STORE.filter_num !== null && STORE.filter_num <= newItemRating)
+          {data.filtered = false;
+          }
+          else
+          {
+            data.filtered = true;
+          }
          
           STORE.store_bookmarks.push(data);
           render();
         })
         .catch(err => { 
           STORE.error_msg = err.message;
-          renderError();
+          render();
+          setTimeout(function(){
+            STORE.error_msg = '';
+            render();
+          },5000);
         });
     });
 
@@ -161,6 +181,7 @@ const bookmark_handlers = (function(){
   function handleClearFilter(){
     $('.filter-drop-down').on('click','#filter-clear-toggle', event => {
       event.preventDefault();
+      STORE.filter_num = null;
       STORE.showFilteredItems = false;
       
       render();

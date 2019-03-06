@@ -3,8 +3,8 @@ const STORE = (function(){
 
 
 
-
-  const error_msg = "";
+  const filter_num = null;
+  const error_msg = '';
   const addBookmark = function(item) {
     
     this.store_bookmarks.push(item);
@@ -27,7 +27,7 @@ const STORE = (function(){
   };
 
   const toggleFilter= function(num){
-    
+    this.filter_num = num;
     this.store_bookmarks.forEach(i=> i.filtered=false);
     let filteredBookMarks = this.store_bookmarks.filter(i => i.rating < num );
     filteredBookMarks.forEach(i=> i.filtered=true);
