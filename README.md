@@ -3,4 +3,6 @@
 # Students:
 # Mehul Patel
 # Enrique Montemayor
-https://github.com/thinkful-ei-bee/mehul-enrique-bookmark
+
+
+https://thinkful-ei-bee.github.io/mehul-enrique-bookmark/
