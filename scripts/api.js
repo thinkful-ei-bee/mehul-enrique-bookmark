@@ -37,7 +37,6 @@ const api = (function () {
 
   function listApiFetch(...args) {
     let error;
-    console.log(args[0]);
     return fetch(...args)
       .then(res => {
         if (!res.ok) {

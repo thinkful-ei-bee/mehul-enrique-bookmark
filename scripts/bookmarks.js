@@ -1,5 +1,5 @@
 'use strict';
-
+/*global $, STORE, api*/
 const bookmark_handlers = (function(){
 
   
@@ -9,7 +9,7 @@ const bookmark_handlers = (function(){
     {
       return ` <li class="js-item-element" data-item-id=${bookmark.id}>
     <p> Title: ${bookmark.title} </p>
-    <p> Rating: ${bookmark.rating === null ? 'Not rated': bookmark.rating}</p>
+    <p> Rating: ${bookmark.rating === null ? 'Not rated': bookmark.rating +'/5'}</p>
       <button class="book-mark-detail-toggle">
         <span class="button-label">See more details</span>
       </button>
@@ -21,7 +21,7 @@ const bookmark_handlers = (function(){
       return ` <li class="js-item-element" data-item-id=${bookmark.id}>
     <p> Title: ${bookmark.title} </p>
     <p> Description: ${bookmark.desc === null ? 'No description': bookmark.desc}</p>
-    <p> Rating: ${bookmark.rating === null ? 'Not rated': bookmark.rating }</p>
+    <p> Rating: ${bookmark.rating === null ? 'Not rated': bookmark.rating + '/5' }</p>
     <input type="button" value="Visit Site" onclick="window.open('${bookmark.url}','_blank')" />  
     <button class="book-mark-detail-toggle">
         <span class="button-label">See less details</span>
@@ -109,7 +109,7 @@ const bookmark_handlers = (function(){
           setTimeout(function(){
             STORE.error_msg = '';
             render();
-          },5000);
+          },3000);
         });
 
     });

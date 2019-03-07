@@ -1,10 +1,7 @@
 'use strict';
-
+/* global api, bookmark_handlers, $, STORE */
 $(document).ready(function(){
 
-  // call api to get bookmarks
-  //bind event listeners
-  //render dom
   bookmark_handlers.bindEventListeners();
   bookmark_handlers.render();
 
@@ -14,7 +11,6 @@ $(document).ready(function(){
       {
         item.expanded = false;
         item.filtered = false;
-       // console.log(item.expanded);
         STORE.addBookmark(item);
       });
       bookmark_handlers.render();

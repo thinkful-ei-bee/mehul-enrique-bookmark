@@ -19,7 +19,7 @@ const STORE = (function(){
   const expandBookmark = function(id)
   {
     let expand_obj = this.store_bookmarks.filter(obj => 
-       obj.id === id
+      obj.id === id
     );
 
   
@@ -33,7 +33,7 @@ const STORE = (function(){
     filteredBookMarks.forEach(i=> i.filtered=true);
    
   
-  }
+  };
 
 
 
